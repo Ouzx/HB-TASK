@@ -23,8 +23,7 @@ public class AddCartViaLogin {
 	ProductPage pp;
 
 	@Before
-	@Given("browser is open")
-	public void browser_is_open() {
+	public void openBrowser() {
 		String projectPath = System.getProperty("user.dir");
 		System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver.exe");
 
@@ -39,6 +38,12 @@ public class AddCartViaLogin {
 	public void closeBrowser() {
 		driver.close();
 		driver.quit();
+	}
+
+	@Given("browser is open")
+	public void browser_is_open() {
+		if (driver == null)
+			throw new IllegalStateException("Browser is not open");
 	}
 
 	@And("navigate to hepsiburada")

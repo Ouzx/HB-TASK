@@ -1,6 +1,7 @@
+@smoke
 Feature: Adding products to cart
 
-	@smoke
+
 	Scenario Outline: Add to cart via login
 
 		Given browser is open
