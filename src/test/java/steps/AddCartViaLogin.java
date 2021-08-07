@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -20,6 +22,7 @@ public class AddCartViaLogin {
 	SearchPage sp;
 	ProductPage pp;
 
+	@Before
 	@Given("browser is open")
 	public void browser_is_open() {
 		String projectPath = System.getProperty("user.dir");
@@ -30,6 +33,12 @@ public class AddCartViaLogin {
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
+	}
+
+	@After
+	public void closeBrowser() {
+		driver.close();
+		driver.quit();
 	}
 
 	@And("navigate to hepsiburada")
@@ -82,7 +91,6 @@ public class AddCartViaLogin {
 
 	@Then("user have products from different stores")
 	public void user_have_products_from_different_stores() {
-		driver.close();
-		driver.quit();
+		pp.CheckCart();
 	}
 }
