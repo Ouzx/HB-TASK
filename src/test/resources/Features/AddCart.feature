@@ -1,7 +1,8 @@
 Feature: Adding products to cart
 
-	Scenario Outline: Add to cart via login 
-		
+	@smoke
+	Scenario Outline: Add to cart via login
+
 		Given browser is open
 		And navigate to hepsiburada
 		When user logins to the hepsiburada
@@ -13,11 +14,8 @@ Feature: Adding products to cart
 		And add from different store
 		Then user have products from different stores
 		## koruma paketi sorusu da kapatilabilir ancak test 1. adimdan baslayacagi icin bu isleme gerek yok.
-		
-		Examples: 
-		| prod |
-		| iphone |
-		| bebek bezi |
-		| maske |
-		| saat |
-		
+
+		Examples:
+			| prod   |
+			| iphone |
+# | maske  |
