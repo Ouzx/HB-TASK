@@ -46,13 +46,14 @@ public class AddCartViaLogin {
 		lp.Login("email", "password");
 	}
 
-	// Eger sistem botu kabul etmezse ya da hatali kullanici girisi yapilirsa burasi hata verir.
+	// Eger sistem botu kabul etmezse ya da hatali kullanici girisi yapilirsa burasi
+	// hata verir.
 	@And("user is navigated to the home page")
 	public void user_is_navigated_to_the_home_page() {
-	    hp.CheckDriverWhereIs();
+		hp.CheckDriverWhereIs();
 	}
-	
-	@And("^user searches for (.*)$") 
+
+	@And("^user searches for (.*)$")
 	public void user_searches_for_prod(String prod) throws InterruptedException {
 		hp.Search(prod);
 	}
@@ -68,20 +69,19 @@ public class AddCartViaLogin {
 		pp = new ProductPage(driver);
 		pp.AddToCart();
 	}
-	
+
 	@And("close recommendation")
 	public void close_recommendation() {
 		pp.closeRecommendation();
 	}
-	
+
 	@And("add from different store")
 	public void add_from_different_store() {
 		pp.FromDifferentStore();
 	}
-	
 
 	@Then("user have products from different stores")
-	public void user_have_products_from_different_stores(){
+	public void user_have_products_from_different_stores() {
 		driver.close();
 		driver.quit();
 	}
