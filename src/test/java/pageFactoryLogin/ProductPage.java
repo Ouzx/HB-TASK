@@ -1,4 +1,4 @@
-package pageFactory;
+package pageFactoryLogin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +19,7 @@ public class ProductPage {
 	By recommendationButton = By.className("checkoutui-Modal-2iZXl");
 
 	By addDifferent = By.cssSelector(".button.small");
-	
+
 	int prodCounter = 0;
 
 	public ProductPage(WebDriver driver) {
@@ -50,9 +50,10 @@ public class ProductPage {
 			System.out.println("! There is no different seller for this product.");
 		}
 	}
-	
+
 	public void CheckCart() {
-		if(prodCounter == 0) throw new RuntimeException("No products have been added.");
+		if (prodCounter == 0)
+			throw new RuntimeException("No products have been added.");
 	}
 
 }

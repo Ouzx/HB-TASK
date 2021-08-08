@@ -1,21 +1,21 @@
 package steps;
 
-import io.cucumber.java.en.Given;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
+
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 
-import pageFactory.*;
+import pageFactoryLogin.*;
 
-public class AddCartViaLogin {
+// Multi threading oldugunda @before ve @after hooklari bug olusturuyor. Bundan dolayi hook kullanmiyorum.
+public class AddCartLogin {
 	WebDriver driver;
 	HomePage hp;
 	LoginPage lp;
@@ -23,10 +23,12 @@ public class AddCartViaLogin {
 	ProductPage pp;
 
 	@Before
-	public void openBrowser() {
+	public void setProps() {
 		String projectPath = System.getProperty("user.dir");
 		System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver.exe");
+	}
 
+	public void openBrowser() {
 		driver = new ChromeDriver();
 
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
@@ -34,7 +36,6 @@ public class AddCartViaLogin {
 		driver.manage().window().maximize();
 	}
 
-	@After
 	public void closeBrowser() {
 		driver.close();
 		driver.quit();
@@ -42,6 +43,7 @@ public class AddCartViaLogin {
 
 	@Given("browser is open")
 	public void browser_is_open() {
+		openBrowser();
 		if (driver == null)
 			throw new IllegalStateException("Browser is not open");
 	}
@@ -53,7 +55,7 @@ public class AddCartViaLogin {
 
 	@When("user logins to the hepsiburada")
 	public void user_enters_username_and_password() throws InterruptedException {
-		hp = new HomePage(driver);
+		hp = new pageFactoryLogin.HomePage(driver);
 		hp.GetLoginPage();
 
 		lp = new LoginPage(driver);
@@ -89,13 +91,10 @@ public class AddCartViaLogin {
 		pp.closeRecommendation();
 	}
 
-	@And("add from different store")
+	@Then("add from different store")
 	public void add_from_different_store() {
 		pp.FromDifferentStore();
-	}
-
-	@Then("user have products from different stores")
-	public void user_have_products_from_different_stores() {
 		pp.CheckCart();
+		closeBrowser();
 	}
 }

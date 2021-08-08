@@ -1,4 +1,4 @@
-package pageFactory;
+package pageFactoryLogin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,25 +19,39 @@ public class HomePage {
 	private By loginButton = By.id("login");
 	private By searchBox = By.className("desktopOldAutosuggestTheme-input");
 
+	@FindBy(xpath = "//span[contains(text(),'Kitap, Müzik, Film, Hobi')]")
+	private WebElement category;
+
+	private By subCategory = By.xpath("//span[contains(text(),'Uzaktan')]");
+
 	public HomePage(WebDriver driver) {
-		this.driver = driver;	
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
-	public void GetLoginPage(){
+
+	public void GetLoginPage() {
 		myAccountButton.click();
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton)).click();
 	}
-	
+
 	public void CheckDriverWhereIs() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(searchBox));
 	}
-	
+
 	public void Search(String prod) throws InterruptedException {
 		driver.findElement(searchBox).sendKeys(prod);
 		Thread.sleep(1000);
 		driver.findElement(searchBox).sendKeys(Keys.ENTER);
+	}
+
+	public void SelectCategory() {
+		category.click();
+	}
+
+	public void SelectSubCategory() {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(subCategory)).click();
 	}
 }
