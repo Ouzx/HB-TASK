@@ -49,7 +49,7 @@ public class AddCartLogin {
 	}
 
 	@And("navigate to hepsiburada")
-	public void user_is_on_login_page() throws InterruptedException {
+	public void user_is_on_login_page() {
 		driver.navigate().to("https://www.hepsiburada.com/");
 	}
 

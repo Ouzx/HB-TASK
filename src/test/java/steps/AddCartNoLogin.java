@@ -16,6 +16,7 @@ public class AddCartNoLogin {
 
     WebDriver driver;
     HomePage hp;
+    SearchPage sp;
 
     public void openBrowser() {
         driver = new ChromeDriver();
@@ -38,7 +39,7 @@ public class AddCartNoLogin {
     }
 
     @And("navigate user to hepsiburada")
-    public void user_is_on_login_page() throws InterruptedException {
+    public void navigate_user_to_hepsiburada() {
         driver.navigate().to("https://www.hepsiburada.com/");
     }
 
@@ -55,14 +56,14 @@ public class AddCartNoLogin {
 
     @And("selects filter")
     public void selects_filter() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        sp = new SearchPage(driver);
+        sp.SetFilter();
     }
 
     @Then("adds product to cart")
-    public void adds_product_to_cart() {
+    public void adds_product_to_cart() throws InterruptedException {
+        sp.AddToCart();
+        // Thread.sleep(50000);
         closeBrowser();
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 }
