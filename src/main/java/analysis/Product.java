@@ -3,12 +3,37 @@ package analysis;
 public class Product {
 
     public Product(String productName, String seller, String category) {
-        this.productName = productName;
+        this.setProductName(productName);
+        this.setSeller(seller);
+        this.setCategory(category);
+    }
+
+    private String productName;
+    private String category;
+    private String seller;
+
+    public String getSeller() {
+        return seller;
+    }
+
+    private void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    private void setCategory(String category) {
         this.category = category;
     }
 
-    public String productName;
-    public String category;
-    public String seller;
+    String getProductName() {
+        return productName;
+    }
+
+    private void setProductName(String productName) {
+        this.productName = productName;
+    }
+
 }

@@ -9,16 +9,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PreAnalysis {
-    WebDriver driver;
+    public WebDriver driver;
+    public ArrayList<Product> products;
 
     ArrayList<String> elements;
-    ArrayList<Product> products;
 
     private static boolean sysout = true;
 
     public PreAnalysis() throws InterruptedException {
         print("Logs are " + sysout);
 
+        print("Pre-Analysis started...");
         products = new ArrayList<Product>();
         elements = new ArrayList<String>();
 
@@ -26,6 +27,7 @@ public class PreAnalysis {
         login();
         collectProducts();
 
+        print("Pre-Analysis Complete.");
         Thread.sleep(3000);
         closeBrowser();
 
@@ -57,9 +59,9 @@ public class PreAnalysis {
             products.add(product);
 
             print("");
-            print(product.productName);
-            print(product.category);
-            print(product.seller);
+            print(product.getProductName());
+            print(product.getCategory());
+            print(product.getSeller());
             print("=========================");
         }
         print("Products iterated: " + products.size());
