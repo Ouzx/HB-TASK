@@ -1,6 +1,5 @@
-# @smoke
-Feature: Adding products to cart
-
+@smoke
+Feature: Adding products to cart via login
 
 	Scenario Outline: Add to cart via login
 
@@ -20,15 +19,4 @@ Feature: Adding products to cart
 		Examples:
 			| prod   |
 			| iphone |
-	# | maske  |
-
-	@smoke
-	Scenario: Add to cart without login
-		Given browser ready
-		And navigate user to hepsiburada
-
-		When user selects category
-		And selects subcategory
-		And selects filter
-		Then adds product to cart
-
+# | maske  |
