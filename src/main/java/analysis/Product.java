@@ -2,7 +2,7 @@ package analysis;
 
 public class Product {
 
-    public Product(String productName, String seller, String category) {
+    public Product(String productName, String category, String seller) {
         this.setProductName(productName);
         this.setSeller(seller);
         this.setCategory(category);

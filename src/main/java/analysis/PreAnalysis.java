@@ -16,7 +16,9 @@ public class PreAnalysis {
 
     private static boolean sysout = true;
 
-    public PreAnalysis() throws InterruptedException {
+    public PreAnalysis(boolean sysout) throws InterruptedException {
+        PreAnalysis.sysout = sysout;
+
         print("Logs are " + sysout);
 
         print("Pre-Analysis started...");
@@ -29,7 +31,6 @@ public class PreAnalysis {
 
         print("Pre-Analysis Complete.");
         Thread.sleep(3000);
-        closeBrowser();
 
     }
 
@@ -54,7 +55,9 @@ public class PreAnalysis {
 
             String productName = driver.findElement(By.cssSelector("#product-name")).getText();
             String seller = driver.findElement(By.xpath("//span[contains(@class,'seller')]/span[2]/a")).getText();
-            String category = driver.findElement(By.cssSelector(".notification-overlay+ li span")).getText();
+
+            String category = parseCategory();
+
             Product product = new Product(productName, seller, category);
             products.add(product);
 
@@ -66,6 +69,17 @@ public class PreAnalysis {
         }
         print("Products iterated: " + products.size());
         driver.navigate().back();
+    }
+
+    public String parseCategory() {
+        for (WebElement breadcrumb : driver.findElements(By.cssSelector(".breadcrumbs span"))) {
+            if (breadcrumb.getText().equals("iPhone iOS Telefonlar") || breadcrumb.getText().equals("Diğer Telefonlar")
+                    || breadcrumb.getText().equals("Android Telefonlar")
+                    || breadcrumb.getText().equals("Laptop & Notebook") || breadcrumb.getText().equals("Tablet")) {
+                return "TECH";
+            }
+        }
+        return "OTHER";
     }
 
     private void login() throws InterruptedException {
@@ -95,11 +109,6 @@ public class PreAnalysis {
         driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-    }
-
-    private void closeBrowser() {
-        driver.close();
-        driver.quit();
     }
 
     private void print(String message) {
