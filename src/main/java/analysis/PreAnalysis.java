@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PreAnalysis {
     public WebDriver driver;
@@ -30,7 +32,6 @@ public class PreAnalysis {
         collectProducts();
 
         print("Pre-Analysis Complete.");
-        Thread.sleep(3000);
 
     }
 
@@ -96,7 +97,8 @@ public class PreAnalysis {
         if (driver.getPageSource().contains("Beklenmeyen bir hata oluştu."))
             throw new RuntimeException("Hepsiburada did not accept login request.");
 
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, 20000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("desktopOldAutosuggestTheme-input")));
         print("Logged in.");
 
     }

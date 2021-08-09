@@ -26,7 +26,6 @@ public class Analysis {
         CompareGroups();
 
         print("Analysis finished");
-        Thread.sleep(3000);
         closeBrowser();
     }
 
