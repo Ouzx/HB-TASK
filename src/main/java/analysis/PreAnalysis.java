@@ -28,7 +28,7 @@ public class PreAnalysis {
         elements = new ArrayList<String>();
 
         openBrowser();
-        login();
+        login("email", "password");
         collectProducts();
 
         print("Pre-Analysis Complete.");
@@ -83,12 +83,12 @@ public class PreAnalysis {
         return "OTHER";
     }
 
-    private void login() throws InterruptedException {
+    private void login(String email, String password) throws InterruptedException {
         driver.navigate().to("https://giris.hepsiburada.com/");
         print("Logging in...");
 
-        driver.findElement(By.id("txtUserName")).sendKeys("email");
-        driver.findElement(By.id("txtPassword")).sendKeys("password");
+        driver.findElement(By.id("txtUserName")).sendKeys(email);
+        driver.findElement(By.id("txtPassword")).sendKeys(password);
 
         Thread.sleep(2000);
 
